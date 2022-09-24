@@ -345,7 +345,7 @@ export function  HttpPost( url, params){
 //######GET请求
 export function HttpGet(url,params = ''){
   try{
-    return  new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       wx.request({
         url     : url,
         data    : params,

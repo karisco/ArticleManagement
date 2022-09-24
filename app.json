@@ -1,13 +1,43 @@
 {
+  "entryPagePath": "pages/index/index",
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/test/test",
+    "pages/search/search",
+    "pages/home/home"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#aaaaaa",
+    "selectedColor": "#00fcff",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/icon/index.png",
+        "selectedIconPath": "/static/icon/indexSelect.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "/static/icon/search.png",
+        "selectedIconPath": "/static/icon/searchSelect.png"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "我",
+        "iconPath": "/static/icon/home.png",
+        "selectedIconPath": "/static/icon/homeSelect.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
