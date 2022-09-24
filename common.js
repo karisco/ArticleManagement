@@ -65,6 +65,7 @@ export function requestGet( url , param ){
         })
     })
 }
+
 export function getUserProfile(){
     return new Promise( ( resolve )=> {
         wx.getUserProfile({
@@ -72,6 +73,18 @@ export function getUserProfile(){
           success(res){
               resolve(1);
           }
+        })
+    })
+}
+
+export function slide(location , time){
+    return new Promise((resolve)=>{
+        wx.pageScrollTo({
+            scrollTop : location,
+            duration : time,
+            success(res){
+                resolve(1);
+            }
         })
     })
 }

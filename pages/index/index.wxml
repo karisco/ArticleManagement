@@ -6,22 +6,12 @@
             </swiper-item>
         </block>
     </swiper>
-    <scroll-view scroll-x class = 'scroll'>
-        <view class = 'scroll-item' wx:for="{{item}}" wx:key="key" bindtap="change">{{item}}</view>
-    </scroll-view>
+    <view class='scroll_outside'>
+        <scroll-view scroll-x class="{{scrollTop>150 ? 'scroll_top' : 'scroll'}}">
+            <view wx:for="{{item}}" wx:key="key" class = "scroll_item {{plate==item.id?'selected':''}}"  bindtap="selected" data-id="{{item.id}}">{{item.name}}</view>
+        </scroll-view>
+    </view>
     <view class="articles">
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
-        <view class="article"></view>
+        <view class="article" wx:for="{{10}}" wx:key="key" ></view>
     </view>
 </view>
