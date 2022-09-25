@@ -5,6 +5,7 @@ page{
     width: 100%;
 }
 .scroll_outside{
+    height: 75rpx;
     position:relative;
 }
 .scroll{
@@ -34,8 +35,7 @@ page{
 }
 .selected{
     font-size: 35rpx;
-    color:black;
-    width: 140rpx;
+    color:red;
 }
 .articles{
     margin-top: 90rpx;
@@ -47,4 +47,11 @@ page{
     background-color: green;
     padding: 20rpx 20rpx 20rpx 20rpx;
 }
-    
+.flushType{
+    color: black;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}

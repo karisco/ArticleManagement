@@ -1,4 +1,5 @@
 <view class="app">
+    <!-- 轮播图 -->
     <swiper autoplay="true" circular="true" >
         <block wx:for='{{img}}' wx:key="key">
             <swiper-item>
@@ -6,12 +7,22 @@
             </swiper-item>
         </block>
     </swiper>
+    <!-- 滑动板块 -->
     <view class='scroll_outside'>
-        <scroll-view scroll-x class="{{scrollTop>150 ? 'scroll_top' : 'scroll'}}">
-            <view wx:for="{{item}}" wx:key="key" class = "scroll_item {{plate==item.id?'selected':''}}"  bindtap="selected" data-id="{{item.id}}">{{item.name}}</view>
+        <scroll-view scroll-x class="{{scrollTop>150 ? 'scroll_top' : 'scroll'}}" bindscroll="scrollmove" scroll-left="{{scrollLeft}}"scroll-with-animation="true"	fast-deceleration="true" enable-passive="true">
+            <view wx:for="{{item}}" wx:key="key" wx:for-index="index" id = "{{'item'+index}}" class = "scroll_item {{plate==item.id?'selected':''}}"  
+                bindtap="selected" data-id="{{item.id}}" data-index="{{index}}">{{item.name}}
+            </view>
+            <view style = "display: inline-block;vertical-align:middle;width: 60rpx;height: 75rpx;background-color: rgb(255, 255, 255);">
+            </view>
         </scroll-view>
+        <view style="display:inline-block;background-color: white;color: rgb(196, 196, 196);height: 75rpx;width: 100%;margin-top: 75rpx;font-size:25rpx;line-height: 75rpx;"><text decode="true">&nbsp;&nbsp;&nbsp;</text>
+            <a class="{{flushType==0?'flushType':''}}" bindtap="changeway">最热</a> | 
+            <a class="{{flushType==1?'flushType':''}}" bindtap="changeway">最新</a>
+        </view>
     </view>
+    <!-- 文章展示板块 -->
     <view class="articles">
-        <view class="article" wx:for="{{10}}" wx:key="key" ></view>
-    </view>
+        <view class="article" wx:for="{{}}" wx:key="key" ></view>
+    </view> 
 </view>

@@ -14,48 +14,121 @@ Page({
 
         //首页文章板块
         item : [
-            {'id' : 0 , 'name' : '推荐'},
-            {'id' : 1 , 'name' : '推荐'},
-            {'id' : 2 , 'name' : '推荐'},
-            {'id' : 3 , 'name' : '推荐'},
-            {'id' : 4 , 'name' : '推荐'},
-            {'id' : 5 , 'name' : '推荐'},
-            {'id' : 6 , 'name' : '推荐'},
-            {'id' : 7 , 'name' : '推荐'},
-            {'id' : 8 , 'name' : '推荐'},
-            {'id' : 9 , 'name' : '推荐'},
+            {'id' : 0 , 'name' : 'php'},
+            {'id' : 1 , 'name' : 'java'},
+            {'id' : 2 , 'name' : 'php'},
+            {'id' : 3 , 'name' : 'java'},
+            {'id' : 4 , 'name' : 'php'},
+            {'id' : 5 , 'name' : 'c++'},
+            {'id' : 6 , 'name' : 'java'},
+            {'id' : 7 , 'name' : 'java'},
+            {'id' : 8 , 'name' : 'php'},
+            {'id' : 9 , 'name' : 'java'},
         ],
 
-        //现在的板块，默认推荐
-        plate : 0
+        //现在的板块，默认推荐,栏目id
+        plate : 0,
+        //现在的推荐方式  0：最热  1：最新 
+        flushType : 0,
+        //板块移动的距离
+        scrollLeft: 0,
     },
 
+    /**
+     * 顶部切换为点击的板块
+     * @param {*} e 点击的元素
+     * @author liuhua 2022/09/25
+     */
     async selected(e){
         let that = this;
 
         //判断点击是否是当前板块
         that.data.plate == e.currentTarget.dataset.id?1:this.changeselected(e.currentTarget.dataset.id);
+
+        //页面变化
         //滑动到顶端
-        await slide(150 , 500);
+        slide(150 , 500);
+        //默认获取最热信息
+        that.setData({flushType:0});
 
-        //
-        that.setData({
-            
-        })
+        //点击节点移动到中间
+        let index = e.currentTarget.dataset.index;
+        let maxindex = that.data.item.length-3;
+
+        if( index>2 && index<maxindex){
+
+            let sel = '#'+'item'+e.currentTarget.dataset.index
+            console.log(sel)
+            wx.createSelectorQuery().select(sel).boundingClientRect(function (rect) {
+
+                //获取屏幕的宽度的一半
+                let screen = wx.getSystemInfoSync().windowWidth/2;
+                //获取点击item的左边坐标
+                let left = rect.left;
+                //获取item的宽度de 一半
+                let subhalfwidth= rect.width/2
+                //需要scrollview 移动的距离是
+                let distance = left-screen+subhalfwidth
+
+                that.setData({
+                  scrollLeft:distance+=that.data.scrollLeft
+                })
+              }).exec()
+        }
+        
+        // 前三个
+        if(index<=2){
+            that.setData({
+                scrollLeft:~that.data.scrollLeft
+            })
+        }
+
+        //后三个
+        if(index>=maxindex){
+            let length = that.data.item.length * 62 ;
+            let distance = parseInt(length/wx.getSystemInfoSync().windowWidth);
+            that.setData({
+                scrollLeft : that.data.scrollLeft +=length-distance*390-that.data.scrollLeft+31
+            })
+        }
+
     },
-
-    async changeselected(e){
+    scrollmove(e){
+        console.log(e.detail.scrollLeft)
+        var scrollLeft = e.detail.scrollLeft;
+        this.data.scrollLeft = scrollLeft
+    },
+    /**
+     * 当用户切换了板块，系统更改当前板块id
+     * @param {*} e 当前节点
+     * @author liuhua 2022/09/25
+     */
+    changeselected(e){
         this.setData({
             plate : e,
         })
     },
 
-    onPageScroll:function(e){
-        this.setData({
-            scrollTop: e.scrollTop
-          })
-      },
-    
+    /**
+     * 更改推荐方式 最新或最热，不做判断，两个方式直接切换
+     */
+    changeway(){
+        let that = this;
+        that.setData({
+            flushType : that.data.flushType == 0 ? 1 : 0
+        })
+    },
+
+    /**
+     * 获取当前屏幕的位置
+     * @param {*} e 
+     */
+    onPageScroll:function(e){ 
+        this.setData({ 
+            scrollTop: e.scrollTop 
+        }) 
+    }, 
+
     /**
      * 生命周期函数--监听页面加载
      */
