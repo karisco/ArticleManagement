@@ -43,7 +43,7 @@ Page({
         let that = this;
 
         //判断点击是否是当前板块
-        that.data.plate == e.currentTarget.dataset.id?1:this.changeselected(e.currentTarget.dataset.id);
+        that.data.plate == e.currentTarget.dataset.id?1:await this.changeselected(e.currentTarget.dataset.id);
 
         //页面变化
         //滑动到顶端
@@ -104,9 +104,14 @@ Page({
      * @author liuhua 2022/09/25
      */
     changeselected(e){
-        this.setData({
-            plate : e,
+        let that = this;
+        return new Promise((resolve)=>{
+            that.setData({
+                plate : e,      
+            })
+            setTimeout(()=>{resolve(1);}, 200);
         })
+        
     },
 
     /**
