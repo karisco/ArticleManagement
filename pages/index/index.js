@@ -104,12 +104,12 @@ Page({
      * @author liuhua 2022/09/25
      */
     changeselected(e){
-        let that = this;
         return new Promise((resolve)=>{
+            let that = this;
             that.setData({
                 plate : e,      
             })
-            setTimeout(()=>{resolve(1);}, 200);
+            setTimeout(resolve(), 200);
         })
         
     },
