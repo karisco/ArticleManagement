@@ -1,5 +1,10 @@
 page{
-    background: rgb(216, 216, 216);
+    background: rgb(218, 218, 218);
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
 }
 .w100{
     width: 100%;
@@ -37,21 +42,45 @@ page{
     font-size: 35rpx;
     color:red;
 }
-.articles{
-    margin-top: 90rpx;
-}
-.article{
-    display: inline-block;
-    width: 100%;
-    height: 200rpx;
-    background-color: green;
-    padding: 20rpx 20rpx 20rpx 20rpx;
-}
 .flushType{
     color: black;
 }
-::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    color: transparent;
+.articles{
+    margin-top: 80rpx;
+}
+.article{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 200rpx;
+    padding: 5rpx 20rpx;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 5rpx;
+}
+.article_title{
+    height: 140rpx;
+}
+.article_info{
+    display: flex;
+    height: 56rpx;
+    line-height: 60rpx;
+}
+.article_avatar{
+    width: 10%;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center; 
+}
+.article_name{
+    color: rgb(172, 172, 172);
+    font-size: 15px;
+    width: 45%;
+}
+.article_time{
+    width: 45%;
+}
+.article_image{
+    display: inline-block;
+    width: 40%;
+    height: 200rpx;
 }

@@ -23,6 +23,24 @@
     </view>
     <!-- 文章展示板块 -->
     <view class="articles">
-        <view class="article" wx:for="{{}}" wx:key="key" ></view>
+        <view class="article" wx:for="{{10}}" wx:key="key">
+            <!-- 标题头像用户名日期 -->
+            <view style="width: 55%;">
+                <view class="article_title ">标题XXXXXXXXXXXXX</view>
+                <view style="display: flex;flex-wrap: wrap;">
+                    <view class="article_avatar article_info">
+                        <view style="height: 20px;width: 20px;border-radius: 25px;">
+                            <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+                        </view>
+                    </view>
+                    <view class="article_name article_info">username</view>
+                    <view class="article_time article_info"> 时间</view>
+                </view>
+            </view>
+            <!-- 图片 -->
+            <view class="article_image">
+                <image style="width: 156px; height: 104px;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+            </view>
+        </view>
     </view> 
 </view>
