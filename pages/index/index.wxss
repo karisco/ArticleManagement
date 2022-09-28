@@ -55,7 +55,7 @@ page{
     height: 200rpx;
     padding: 5rpx 20rpx;
     background-color: rgb(255, 255, 255);
-    margin-bottom: 5rpx;
+    margin-bottom:1px;
 }
 .article_title{
     height: 140rpx;
@@ -63,9 +63,9 @@ page{
 .article_info{
     display: flex;
     height: 56rpx;
-    line-height: 60rpx;
+    line-height: 56rpx;
 }
-.article_avatar{
+.article_avatar{ 
     width: 10%;
     align-items: center;
     vertical-align: center;
@@ -73,14 +73,22 @@ page{
 }
 .article_name{
     color: rgb(172, 172, 172);
+    padding-top: 4rpx;
+    padding-left: 10rpx;
     font-size: 15px;
-    width: 45%;
+    width: 40%;
 }
 .article_time{
-    width: 45%;
+    padding-left: 15px;
+    color: rgb(172, 172, 172);
+    font-size: 12px;
+    padding-top: 4rpx;
+    width: 40%;
 }
 .article_image{
-    display: inline-block;
+    display:flex;
+    justify-content: center;
+    align-items:center;   
     width: 40%;
     height: 200rpx;
 }

@@ -1,4 +1,4 @@
-const  URL = 'http://';
+const  URL = 'http://8.130.35.147/';
 
 /**
  * 提示弹出框

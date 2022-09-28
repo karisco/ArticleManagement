@@ -10,6 +10,9 @@
     <!-- 滑动板块 -->
     <view class='scroll_outside'>
         <scroll-view scroll-x class="{{scrollTop>150 ? 'scroll_top' : 'scroll'}}" bindscroll="scrollmove" scroll-left="{{scrollLeft}}"scroll-with-animation="true"	fast-deceleration="true" enable-passive="true">
+            <view id = "item-1" class = "scroll_item {{plate==-1?'selected':''}}"  
+                bindtap="selected" data-id="-1" data-index="-1">推荐
+            </view>
             <view wx:for="{{item}}" wx:key="key" wx:for-index="index" id = "{{'item'+index}}" class = "scroll_item {{plate==item.id?'selected':''}}"  
                 bindtap="selected" data-id="{{item.id}}" data-index="{{index}}">{{item.name}}
             </view>
@@ -23,23 +26,43 @@
     </view>
     <!-- 文章展示板块 -->
     <view class="articles">
-        <view class="article" wx:for="{{10}}" wx:key="key">
-            <!-- 标题头像用户名日期 -->
+        <!-- <view class="article" wx:for="{{1}}" wx:key="key" >
+             标题头像用户名日期 
             <view style="width: 55%;">
-                <view class="article_title ">标题XXXXXXXXXXXXX</view>
+                <view class="article_title ">title{{}}</view>
                 <view style="display: flex;flex-wrap: wrap;">
                     <view class="article_avatar article_info">
                         <view style="height: 20px;width: 20px;border-radius: 25px;">
                             <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="../../static/img/1.jpg" mode='aspectFill'></image>
                         </view>
                     </view>
-                    <view class="article_name article_info">username</view>
-                    <view class="article_time article_info"> 时间</view>
+                    <view class="article_name article_info">乐山大佛{{username}}</view>
+                    <view class="article_time article_info">2022-09-28{{}}</view>
+                </view>
+            </view>
+             图片 
+            <view class="article_image">
+                <image style="width: 156px; height: 104px;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+            </view>
+        </view> -->
+        
+        <view class="article" wx:for="{{10}}" wx:key="key" bindtap="routing" data-rticleid = '32748623'>
+            <!-- 标题头像用户名日期 -->
+            <view style="width: 55%;">
+                <view class="article_title ">国际社会不会承认乌东部四个州的入俄公投，公投细节也疑点多多</view>
+                <view style="display: flex;flex-wrap: wrap;">
+                    <view class="article_avatar article_info">
+                        <view style="height: 20px;width: 20px;border-radius: 25px;">
+                            <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+                        </view>
+                    </view>
+                    <view class="article_name article_info">乐山大佛</view>
+                    <view class="article_time article_info">2022-09-28</view>
                 </view>
             </view>
             <!-- 图片 -->
             <view class="article_image">
-                <image style="width: 156px; height: 104px;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+                <image style="width: 156px; height: 104px;"src="https://inews.gtimg.com/newsapp_bt/0/15287210490/1000" mode='aspectFill'></image>
             </view>
         </view>
     </view> 

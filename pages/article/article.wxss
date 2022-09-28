@@ -1,0 +1,27 @@
+.page{
+    padding: 10px;
+}
+.atricle_title{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 32px;
+}
+.article_info{
+    display: flex;
+    color:rgb(167, 167, 167);
+    font-size: 12px;
+    align-items: center;
+}
+.name{
+    margin-left: 16rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    width: 45%;
+}
+.time{
+    text-align: right;
+    height: 70rpx;
+    line-height: 70rpx;
+    width: 200rpx;
+    width: 45%;
+}

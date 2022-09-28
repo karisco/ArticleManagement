@@ -1,4 +1,4 @@
-import { slide } from '../../common.js'
+import { slide , requestGet} from '../../common.js'
 Page({
 
     /**
@@ -14,7 +14,6 @@ Page({
 
         //首页文章板块
         item : [
-            {'id' : 0 , 'name' : 'php'},
             {'id' : 1 , 'name' : 'java'},
             {'id' : 2 , 'name' : 'php'},
             {'id' : 3 , 'name' : 'java'},
@@ -27,7 +26,7 @@ Page({
         ],
 
         //现在的板块，默认推荐,栏目id
-        plate : 0,
+        plate : -1,
         //现在的推荐方式  0：最热  1：最新 
         flushType : 0,
         //板块移动的距离
@@ -54,8 +53,9 @@ Page({
         //点击节点移动到中间
         let index = e.currentTarget.dataset.index;
         let maxindex = that.data.item.length-3;
-
-        if( index>2 && index<maxindex){
+        console.log(index);
+        console.log(maxindex);
+        if( index>1 && index<maxindex){
 
             let sel = '#'+'item'+e.currentTarget.dataset.index
             console.log(sel)
@@ -77,7 +77,8 @@ Page({
         }
         
         // 前三个
-        if(index<=2){
+        if( index<=1 ){
+            console.log(index);
             that.setData({
                 scrollLeft:~that.data.scrollLeft
             })
@@ -88,7 +89,7 @@ Page({
             let length = that.data.item.length * 62 ;
             let distance = parseInt(length/wx.getSystemInfoSync().windowWidth);
             that.setData({
-                scrollLeft : that.data.scrollLeft +=length-distance*390-that.data.scrollLeft+31
+                scrollLeft : that.data.scrollLeft +=length-distance*390-that.data.scrollLeft+31+62
             })
         }
 
@@ -134,9 +135,19 @@ Page({
         }) 
     }, 
 
+    //跳转文章详情页
+    routing(e){
+        let id  = e.currentTarget.dataset.rticleid;
+        console.log(id);
+        wx.navigateTo({
+          url: '/pages/article/article?id='+id,
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+
     },
 })
