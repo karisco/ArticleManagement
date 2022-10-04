@@ -1,4 +1,4 @@
-import { slide , requestGet} from '../../common.js'
+import { slide , requestGet } from '../../common.js'
 Page({
 
     /**
@@ -148,6 +148,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        get();
     },
+
+    async get(){
+        
+    }
 })

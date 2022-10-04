@@ -66,10 +66,10 @@ export function getCode(){
  * @param {*} param 参数
  * @author liuhua 2022/09/25
  */
-export function requestGet( url , param ){
-    return new Promise((resolv)=>{
+export function getRequest( url , param ){
+    return new Promise((resolve)=>{
         wx.request({
-            url : url,
+            url : URL+url,
             data : param,
             method  : 'GET',
             success: function (res) {
@@ -77,6 +77,33 @@ export function requestGet( url , param ){
             },
         })
     })
+}
+
+/**
+ * http Post类型请求
+ * @param {*} url 地址
+ * @param {*} param 参数
+ * @author liuhua 2022/09/25
+ */
+export function postRequest( url , param ){
+    return new Promise((resolve)=>{
+        wx.request({
+            url : URL+url,
+            data : param,
+            method  : 'POST',
+            success: function (res) {
+              resolve(res.data);
+            },
+        })
+    })
+}
+
+export function loginRequest(){
+    try{
+        return new Promise()
+    }catch(e){
+
+    }
 }
 
 /**
@@ -110,4 +137,22 @@ export function slide(location , time){
             }
         })
     })
+}
+
+export async function register(){
+    return new Promise( async (resolve, reject)=>{
+        let code = await getCode();
+        let res = await postRequest('wechat\\Login\\Register' , { 'code' :code });
+        if(res.code !=1){
+            res.constructor == Object ? success(res.msg,'none') : success('请求超时','');
+            resolve({code : 0})
+        }{
+            setUserInfo(res.data.token);
+            resolve({code : 1})
+        }
+    })
+}
+
+export function setUserInfo(key ,data){
+    wx.setStorageSync( key , data )
 }
