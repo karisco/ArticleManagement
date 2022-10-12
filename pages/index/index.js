@@ -1,4 +1,4 @@
-import { slide , requestGet } from '../../common.js'
+import { slide , getRequest, getCode } from '../../common.js'
 Page({
 
     /**
@@ -8,21 +8,17 @@ Page({
         //页面轮播图
         img : [
             '../../static/img/1.jpg',
-            '../../static/img/2.jpg',
             '../../static/img/3.jpg',
         ],
 
         //首页文章板块
         item : [
-            {'id' : 1 , 'name' : 'java'},
-            {'id' : 2 , 'name' : 'php'},
-            {'id' : 3 , 'name' : 'java'},
-            {'id' : 4 , 'name' : 'php'},
-            {'id' : 5 , 'name' : 'c++'},
-            {'id' : 6 , 'name' : 'java'},
-            {'id' : 7 , 'name' : 'java'},
-            {'id' : 8 , 'name' : 'php'},
-            {'id' : 9 , 'name' : 'java'},
+            {'id' : 1 , 'title' : ''},
+            {'id' : 2 , 'title' : ''},
+            {'id' : 3 , 'title' : ''},
+            {'id' : 4 , 'title' : ''},
+            {'id' : 5 , 'title' : ''},
+            {'id' : 6 , 'title' : ''},
         ],
 
         //现在的板块，默认推荐,栏目id
@@ -31,6 +27,41 @@ Page({
         flushType : 0,
         //板块移动的距离
         scrollLeft: 0,
+    },
+    async getCol(){
+        let that = this;
+        let code = await getCode();
+        let res = await getRequest('wechat/article/getCol');
+        if(res.code == 1){
+            that.setData({
+                item : res.data
+            })
+        }
+    },
+
+    async getArticle(){
+        let param = new Array;      
+        this.data.flushType == 0 ?  param['order'] = 'like desc' : param['order'] = 'create_time desc';
+        this.data.plate == ~1 ? param['item'] = null : param['item'] = this.data.plate
+        
+        let res = await getRequest('wechat/article/getArticle',param);
+
+        wx.stopPullDownRefresh();
+    },
+
+    /**
+     * 下拉刷新
+     */
+    onPullDownRefresh:  function () {
+       this.getArticle();
+    },
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+
+    onLoad(options) {
+      this.getCol();
     },
 
     /**
@@ -43,7 +74,6 @@ Page({
 
         //判断点击是否是当前板块
         that.data.plate == e.currentTarget.dataset.id?1:await this.changeselected(e.currentTarget.dataset.id);
-
         //页面变化
         //滑动到顶端
         slide(150 , 500);
@@ -58,7 +88,6 @@ Page({
         if( index>1 && index<maxindex){
 
             let sel = '#'+'item'+e.currentTarget.dataset.index
-            console.log(sel)
             wx.createSelectorQuery().select(sel).boundingClientRect(function (rect) {
 
                 //获取屏幕的宽度的一半
@@ -78,7 +107,7 @@ Page({
         
         // 前三个
         if( index<=1 ){
-            console.log(index);
+            // console.log(index);
             that.setData({
                 scrollLeft:~that.data.scrollLeft
             })
@@ -95,7 +124,7 @@ Page({
 
     },
     scrollmove(e){
-        console.log(e.detail.scrollLeft)
+        // console.log(e.detail.scrollLeft)
         var scrollLeft = e.detail.scrollLeft;
         this.data.scrollLeft = scrollLeft
     },
@@ -138,20 +167,8 @@ Page({
     //跳转文章详情页
     routing(e){
         let id  = e.currentTarget.dataset.rticleid;
-        console.log(id);
         wx.navigateTo({
           url: '/pages/article/article?id='+id,
         })
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad(options) {
-        get();
-    },
-
-    async get(){
-        
-    }
 })

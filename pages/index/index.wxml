@@ -14,7 +14,7 @@
                 bindtap="selected" data-id="-1" data-index="-1">推荐
             </view>
             <view wx:for="{{item}}" wx:key="key" wx:for-index="index" id = "{{'item'+index}}" class = "scroll_item {{plate==item.id?'selected':''}}"  
-                bindtap="selected" data-id="{{item.id}}" data-index="{{index}}">{{item.name}}
+                bindtap="selected" data-id="{{item.id}}" data-index="{{index}}">{{item.title}}
             </view>
             <view style = "display: inline-block;vertical-align:middle;width: 60rpx;height: 75rpx;background-color: rgb(255, 255, 255);">
             </view>
