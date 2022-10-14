@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/look/admin/assets/images/favicon.png" type="image/png">
+    <title></title>
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/look/admin/assets/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <link href="/look/admin/assets/css/icons.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/style.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+
+<!--Start left side Menu-->
+<div class="left-side sticky-left-side">
+
+    <!--logo-->
+    <div class="logo">
+        <a href="index.html"><img src="/look/admin/assets/images/logo.png" alt=""></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="index.html"><img src="/look/admin/assets/images/logo-icon.png" alt=""></a>
+    </div>
+    <!--logo-->
+
+    <div class="left-side-inner">
+        <!--菜单 导航栏-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+            <li><a href="{:url('index/index')}"><i class="icon-home"></i> <span>主页</span></a></li>
+            <li><a href="{:url('user/index')}"><i class="icon-people"></i> <span>用户管理</span></a></li>
+            <li class="active"><a href="{:url('ArticleItem/index')}"><i class="icon-list"></i> <span>类别管理</span></a></li>
+            <li><a href="{:url('ArticleManage/index')}"><i class="icon-book-open"></i> <span>文章管理</span></a></li>
+<!--            <li><a href="{:url('ArticleCheck/index')}"><i class="icon-note"></i> <span>审核文章</span></a></li>-->
+        </ul>
+        <!--End sidebar nav-->
+
+    </div>
+</div>
+<!--End left side menu-->
+
+
+<!-- main content start-->
+<div class="main-content" >
+
+    <!-- header section start-->
+    <div class="header-section">
+        <!--notification menu start -->
+        <div class="menu-right">
+            <ul class="notification-menu">
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        root
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        
+                        <li> <a href="{:url('exit')}"> <i class="fa fa-lock"></i> 退出 </a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--notification menu end -->
+
+    </div>
+    <!-- header section end-->
+
+
+
+    <!--body wrapper start-->
+    <div class="wrapper">
+
+
+        <!--Start row-->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box" style="height: 800px">
+                    <a class="btn btn-primary" type="button" href="{:url('add')}" style="outline: none;box-shadow: none">添加标题</a>
+                    <!--                    <h2 class="header-title">Basic example</h2>-->
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="sort" scope="col" data-field="id">id</th>
+                            <th class="sort" scope="col" data-field="type">排序</th>
+                            <th class="sort" scope="col" data-field="title">标题</th>
+                            <th class="sort" scope="col" data-field="status">状态</th>
+                            <th class="sort" scope="col" data-field="create_time">创建时间</th>
+                            <th class="sort" scope="col" data-field="update_time">修改时间</th>
+                            <th scope="col" style="width: 30px"></th>
+                            <th scope="col" style="width: 30px"></th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <form>
+                        {foreach item="vo" name="list" key="key"}
+                        <tr>
+                            <th scope="col">{$vo.id}</th>
+<!--                            <th scope="col"><input style="width:20px" ></th>-->
+                            <th scope="col">{$vo.title}</th>
+                            <th scope="col">{$status[$vo.status]}</th>
+                            <th scope="col">{$vo.create_time|date ='Y-m-d H:i'}</th>
+                            <th scope="col">{$vo.update_time|date ='Y-m-d H:i'}</th>
+                            {if condition="$vo.status eq 1" }
+                            <th scope="col"><a class="btn btn-danger" type="button" href="{:url('changeStatus',['id' => $vo.id ,'status' => $vo.status])}" style="outline: none;box-shadow: none">冻结</a></th>
+                            {else}<th scope="col"><a class="btn btn-primary" type="button" href="{:url('changeStatus',['id' => $vo.id ,'status' => $vo.status])}" style="outline: none;box-shadow: none">启用</a></th>{/else}
+                            {/if}
+                            <th scope="col"><a class="btn btn-primary" type="button"  href="{:url('delete',['id' => $vo.id])}" style="outline: none;box-shadow: none">删除</a></th>
+                        </tr>
+                            {foreach item="ch" name="$vo.children" key="key"}
+                            <tr>
+                                <th scope="col" style="visibility:hidden;">{$ch.id}</th>
+<!--                                <th scope="col"><input style="width:20px" ></th>-->
+                                <th scope="col">{$ch.title}</th>
+                                <th scope="col">{$status[$ch.status]}</th>
+                                <th scope="col">{$ch.create_time|date ='Y-m-d H:i'}</th>
+                                <th scope="col">{$ch.update_time|date ='Y-m-d H:i'}</th>
+                                {if condition="$ch.status eq 1" }
+                                <th scope="col"><a class="btn btn-danger" type="button" href="{:url('changeStatus',['id' => $ch.id ,'status' => $ch.status])}" style="outline: none;box-shadow: none">冻结</a></th>
+                                {else}<th scope="col"><a class="btn btn-primary" type="button" href="{:url('changeStatus',['id' => $ch.id ,'status' => $ch.status])}" style="outline: none;box-shadow: none">启用</a></th>{/else}
+                                {/if}
+                                <th scope="col"><a class="btn btn-primary" type="button"  href="{:url('delete',['id' => $ch.id])}" style="outline: none;box-shadow: none">删除</a></th>
+                            </tr>
+                            {/foreach}
+                        {/foreach}
+                        </form>
+<!--                        <tr>-->
+<!--                            <th scope="col">2</th>-->
+<!--                            <th scope="col"><input style="width:20px" ></th>-->
+<!--                            <th scope="col">title</th>-->
+<!--                            <th scope="col">status</th>-->
+<!--                            <th scope="col">create_time</th>-->
+<!--                            <th scope="col">update_time</th>-->
+<!--                            <th scope="col"><a class="btn btn-danger" type="button" value="编辑" style="outline: none;box-shadow: none">冻结</a></th>-->
+<!--                            <th scope="col"><a class="btn btn-primary" type="button" value="编辑" style="outline: none;box-shadow: none">删除</a></th>-->
+<!--                            <th scope="col"><a class="btn btn-primary" type="button" value="编辑" style="outline: none;box-shadow: none">添加子类</a></th>-->
+<!--                        </tr>-->
+<!--                        {/foreach-->
+                        </tbody>
+                    </table>
+                    <div class="text-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End row-->
+
+
+    </div>
+    <!-- End Wrapper-->
+
+
+    <!--Start  Footer -->
+    <footer class="footer-main">Copyright &copy; 2018.Company name All rights reserved.</footer>
+    <!--End footer -->
+
+</div>
+<!--End main content -->
+
+
+
+<!--Begin core plugin -->
+<script src="/look/admin/assets/js/jquery.min.js"></script>
+<script src="/look/admin/assets/js/bootstrap.min.js"></script>
+<script src="/look/admin/assets/plugins/moment/moment.js"></script>
+<script  src="/look/admin/assets/js/jquery.slimscroll.js "></script>
+<script src="/look/admin/assets/js/jquery.nicescroll.js"></script>
+<script src="/look/admin/assets/js/functions.js"></script>
+<!-- End core plugin -->
+
+<!--Begin Page Level Plugin-->
+<script src="/look/admin/assets/plugins/datatables/js/jquery.datatables.min.js"></script>
+<!--End Page Level Plugin-->
+
+</body>
+
+</html>

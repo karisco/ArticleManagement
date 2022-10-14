@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/look/admin/assets/images/favicon.png" type="image/png">
+    <title></title>
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/look/admin/assets/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <link href="/look/admin/assets/css/icons.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/style.css" rel="stylesheet">
+    <link href="/look/admin/assets/css/responsive.css" rel="stylesheet">
+    <link href="/look/admin/admin.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="sticky-header">
+
+
+<!--Start left side Menu-->
+<div class="left-side sticky-left-side">
+
+    <!--logo-->
+    <div class="logo">
+        <a href="index.html"><img src="/look/admin/assets/images/logo.png" alt=""></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        <a href="index.html"><img src="" alt=""></a>
+    </div>
+    <!--logo-->
+
+    <div class="left-side-inner">
+        <!--菜单 导航栏-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+            <li><a href="{:url('index/index')}"><i class="icon-home"></i> <span>主页</span></a></li>
+            <li class="active"><a href="{:url('user/index')}"><i class="icon-people"></i> <span>用户管理</span></a></li>
+            <li><a href="{:url('ArticleItem/index')}"><i class="icon-list"></i> <span>类别管理</span></a></li>
+            <li><a href="{:url('ArticleManage/index')}"><i class="icon-book-open"></i> <span>文章管理</span></a></li>
+<!--            <li><a href="{:url('ArticleCheck/index')}"><i class="icon-note"></i> <span>审核文章</span></a></li>-->
+        </ul>
+        <!--End sidebar nav-->
+
+    </div>
+</div>
+<!--End left side menu-->
+
+
+<!-- main content start-->
+<div class="main-content" >
+
+    <!-- header section start-->
+    <div class="header-section">
+        <!--notification menu start -->
+        <div class="menu-right">
+            <ul class="notification-menu">
+                <li>
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        root
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                        <li> <a href="{:url('exit')}"> <i class="fa fa-lock"></i> 退出 </a> </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--notification menu end -->
+
+    </div>
+    <!-- header section end-->
+
+
+
+    <!--body wrapper start-->
+    <div class="wrapper">
+
+        <!--Start Page Title-->
+        <div class="page-title-box">
+            <h4 class="page-title">用户管理</h4>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <a href="{:url('index')}">主页</a>
+                </li>
+<!--                <li class="active">-->
+<!--                    Data Table-->
+<!--                </li>-->
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+        <!--End Page Title-->
+
+        <!--Start row-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box" style="height: 800px">
+<!--                    <h2 class="header-title">Basic example</h2>-->
+                    <div class="search-box-top" style="width: 300px;float:right;padding: 0 0">
+                        <form action="{:url('index')}" method="get">
+                            <div class="input-group">
+                                <input name="keywords" class="form-control input-search" placeholder="Search..." type="text">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                                  </span> </div>
+                        </form>
+                    </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">序号</th>
+                                <th class="sort" scope="col" data-field="id">id</th>
+                                <th class="sort" scope="col" data-field="nickname">昵称</th>
+                                <th scope="col" >头像</th>
+                                <th class="sort" scope="col" data-field="location">位置</th>
+                                <th class="sort" scope="col" data-field="phone">手机号</th>
+                                <th class="sort" scope="col" data-field="mail">邮箱</th>
+                                <th class="sort" scope="col" data-field="status">状态</th>
+                                <th class="sort" scope="col" data-field="create_time">注册时间</th>
+                                <th class="sort" scope="col" data-field="last_login_time">最后登录</th>
+                                <th class="sort" scope="col" data-field="update_time">最后修改</th>
+<!--                                <th scope="col" style="width: 30px"></th>-->
+                                <th scope="col" style="width: 30px"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach item="vo" name="list" key=""key}
+                                <tr>
+                                    <th scope="col"><?php echo ((empty($_GET['page'])?1:$_GET['page'])-1)*10+$key+1?></th>
+                                    <th scope="col">{$vo.id}</th>
+                                    <th scope="col">{$vo.nickname}</th>
+                                    <th scope="col"><img src="{$vo.avatar}" width="52px" height="52px"></th>
+                                    <th scope="col">{$vo.location}</th>
+                                    <th scope="col">{$vo.phone}</th>
+                                    <th scope="col">{$vo.mail}</th>
+                                    <th scope="col">{$status[$vo.status]}</th>
+                                    <th scope="col">{$vo.create_time|date ='Y-m-d H:i'}</th>
+                                    <th scope="col">{$vo.last_login_time|date ='Y-m-d H:i'}</th>
+                                    <th scope="col">{$vo.update_time|date ='Y-m-d H:i'}</th>
+<!--                                    <th scope="col"><input class="btn btn-xs btn-primary" type="button" value="Input"></th>-->
+                                    <th scope="col"><a class="btn btn-primary" type="button" value="编辑" style="outline: none;box-shadow: none" href="{:url('edit',['id'=>$vo.id])}">编辑</a></th>
+<!--                                    <th scope="col"><input class="btn btn-xs btn-primary" type="button" value=""></th>-->
+                                </tr>
+                            {/foreach}
+                            </tbody>
+                        </table>
+                    <div class="text-right">
+                        {$page|raw}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End row-->
+
+
+    </div>
+    <!-- End Wrapper-->
+
+
+    <!--Start  Footer -->
+    <footer class="footer-main">Copyright &copy; 2018.Company name All rights reserved.</footer>
+    <!--End footer -->
+
+</div>
+<!--End main content -->
+
+
+
+<!--Begin core plugin -->
+<script src="/look/admin/assets/js/jquery.min.js"></script>
+<script src="/look/admin/assets/js/bootstrap.min.js"></script>
+<script src="/look/admin/assets/plugins/moment/moment.js"></script>
+<script  src="/look/admin/assets/js/jquery.slimscroll.js "></script>
+<script src="/look/admin/assets/js/jquery.nicescroll.js"></script>
+<script src="/look/admin/assets/js/functions.js"></script>
+<!-- End core plugin -->
+
+<!--Begin Page Level Plugin-->
+<script src="/look/admin/assets/plugins/datatables/js/jquery.datatables.min.js"></script>
+<!--End Page Level Plugin-->
+<script>
+    $(".sort").click(function (e) {
+
+        let sort_field = getQueryVariable("sort_field");    //id
+        let sort_by = getQueryVariable("sort_by");  //desc
+
+        let field = e.currentTarget.dataset.field;  //id
+        let by;
+
+        if(sort_field !=null && sort_by!=null){
+            if(sort_field == field){
+                console.log(1);
+                sort_by == 'desc' ? by = 'asc' : by = 'desc';
+            }else{
+                sort_by == 'desc' ? by = 'asc' : by = 'desc';
+            }
+        }else{
+            field == 'id'? by = 'desc' : by = 'asc';
+        }
+
+        // console.log(sort_field);
+        // console.log(sort_by);
+        // console.log(field);
+        // console.log(by);
+        //
+        let url = "http://8.130.35.147/admin/user/index?sort_field="+field+"&sort_by="+by
+
+        window.location.href=url;
+    })
+    function getQueryVariable(variable)
+    {
+        let query = window.location.search.substring(1);
+        let vars = query.split("&");
+        for (let i=0;i<vars.length;i++) {
+            let pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+    function turn(e){
+        if(e == 'desc') {
+            return 'asc';
+        }
+        return 'desc';
+    }
+</script>
+</body>
+
+</html>
