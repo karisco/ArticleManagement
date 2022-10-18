@@ -13,14 +13,8 @@ Page({
 
         //首页文章板块
         item : [
-            {'id' : 1 , 'title' : ''},
-            {'id' : 2 , 'title' : ''},
-            {'id' : 3 , 'title' : ''},
-            {'id' : 4 , 'title' : ''},
-            {'id' : 5 , 'title' : ''},
-            {'id' : 6 , 'title' : ''},
         ],
-
+        artilce : [],
         //现在的板块，默认推荐,栏目id
         plate : -1,
         //现在的推荐方式  0：最热  1：最新 
@@ -42,9 +36,21 @@ Page({
     async getArticle(){
         let param = new Array;      
         this.data.flushType == 0 ?  param['order'] = 'like desc' : param['order'] = 'create_time desc';
-        this.data.plate == ~1 ? param['item'] = null : param['item'] = this.data.plate
-        
+        this.data.plate == ~1 ? param['item'] = null : param['item'] = this.data.plate;
+        param['start'] = this.data.artilce.length;
         let res = await getRequest('wechat/article/getArticle',param);
+        if(res.code != 1){
+            //报错代码
+            console.log(1);
+        }else{
+            for(var i in this.data.artilce){
+                res.data.push(this.data.artilce[i])
+            }
+            this.setData({
+                artilce :  res.data
+            })
+        }
+
 
         wx.stopPullDownRefresh();
     },
@@ -62,6 +68,7 @@ Page({
 
     onLoad(options) {
       this.getCol();
+      this.getArticle()
     },
 
     /**
@@ -121,6 +128,8 @@ Page({
                 scrollLeft : that.data.scrollLeft +=length-distance*390-that.data.scrollLeft+31+62
             })
         }
+        this.data.artilce = [''];
+        this.getArticle()
 
     },
     scrollmove(e){
@@ -150,8 +159,10 @@ Page({
     changeway(){
         let that = this;
         that.setData({
-            flushType : that.data.flushType == 0 ? 1 : 0
+            flushType : that.data.flushType == 0 ? 1 : 0,
+            artilce : []
         })
+        this.getArticle()
     },
 
     /**

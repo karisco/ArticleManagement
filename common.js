@@ -85,9 +85,10 @@ export function getRequest( url , param ){
  * @param {*} param 参数
  * @author liuhua 2022/09/25
  */
-export function postRequest( url , param ){
+export function postRequest( url , header , param ){
     return new Promise((resolve)=>{
         wx.request({
+            header : header,
             url : URL+url,
             data : param,
             method  : 'POST',
@@ -115,7 +116,7 @@ export function getUserProfile(){
         wx.getUserProfile({
           desc: '获取你的昵称，头像，地区及性别',
           success(res){
-              resolve(1);
+              resolve(res.userInfo);
           }
         })
     })

@@ -1,3 +1,4 @@
+import { slide , getRequest, getCode } from '../../common.js'
 // pages/search/search.js
 Page({
 
@@ -5,8 +6,29 @@ Page({
      * 页面的初始数据
      */
     data: {
+        keyword : '',
     },
 
+
+    async search(){
+        let keyword = this.data.keywords;
+        let res = await getRequest('wechat/article/search',{'keyword' : keyword});
+        if(res.code != 1){
+            //报错代码
+            console.log(1);
+        }else{
+            this.setData({
+                article : res.data
+            })
+        }
+    },
+
+    routing(e){
+        let id  = e.currentTarget.dataset.rticleid;
+        wx.navigateTo({
+          url: '/pages/article/article?id='+id,
+        })
+    },
     /**
      * 生命周期函数--监听页面加载
      */

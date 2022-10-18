@@ -1,3 +1,4 @@
+import { slide , getRequest, getCode } from '../../common.js'
 // pages/article/article.js
 Page({
 
@@ -5,13 +6,23 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        article:'',
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad(options) {
+    async onLoad(options) {
+        console.log(options.id);
+        let res = await getRequest('wechat/article/articleInfo',{'id' : options.id});
+        if(res.code != 1){
+            //报错代码
+            console.log(1);
+        }else{
+            this.setData({
+                article : res.data
+            })
+        }
     },
 
     /**

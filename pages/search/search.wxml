@@ -1,0 +1,38 @@
+<view>
+     <view>
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+            <!-- 搜索框 -->
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" model:value="{{keywords}}" placeholder="请输入搜索内容"/>
+                </view>
+            </view>
+            <view class="weui-search-bar__cancel-btn" bindtap='search'>搜索</view>
+        </view>
+    </view>
+</view>
+<!-- 文章展示板块 -->
+<view class="articles">
+
+<view class="article" wx:for="{{article}}" wx:key="key" bindtap="routing" data-rticleid = '{{item.id}}'>
+    <!-- 标题头像用户名日期 -->
+    <view style="width: 55%;">
+        <view class="article_title ">{{item.title}}</view>
+        <view style="display: flex;flex-wrap: wrap;">
+            <view class="article_avatar article_info">
+                <view style="height: 20px;width: 20px;border-radius: 25px;">
+                    <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="{{item.avatar}}" mode='aspectFill'></image>
+                </view>
+            </view>
+            <view class="article_name article_info">{{item.title}}</view>
+            <view class="article_time article_info">{{item.create_time}}</view>
+        </view>
+    </view>
+    <!-- 图片 -->
+    <view class="article_image">
+        <image style="width: 156px; height: 104px;"src="{{item.main_image}}" mode='aspectFill'></image>
+    </view>
+</view>
+
+</view> 

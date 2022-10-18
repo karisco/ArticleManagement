@@ -26,44 +26,26 @@
     </view>
     <!-- 文章展示板块 -->
     <view class="articles">
-        <!-- <view class="article" wx:for="{{1}}" wx:key="key" >
-             标题头像用户名日期 
-            <view style="width: 55%;">
-                <view class="article_title ">title{{}}</view>
-                <view style="display: flex;flex-wrap: wrap;">
-                    <view class="article_avatar article_info">
-                        <view style="height: 20px;width: 20px;border-radius: 25px;">
-                            <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="../../static/img/1.jpg" mode='aspectFill'></image>
-                        </view>
-                    </view>
-                    <view class="article_name article_info">乐山大佛{{username}}</view>
-                    <view class="article_time article_info">2022-09-28{{}}</view>
-                </view>
-            </view>
-             图片 
-            <view class="article_image">
-                <image style="width: 156px; height: 104px;"src="../../static/img/1.jpg" mode='aspectFill'></image>
-            </view>
-        </view> -->
-        
-        <view class="article" wx:for="{{10}}" wx:key="key" bindtap="routing" data-rticleid = '32748623'>
+
+        <view class="article" wx:for="{{artilce}}" wx:key="key" bindtap="routing" data-rticleid = '{{item.id}}'>
             <!-- 标题头像用户名日期 -->
             <view style="width: 55%;">
-                <view class="article_title ">国际社会不会承认乌东部四个州的入俄公投，公投细节也疑点多多</view>
+                <view class="article_title ">{{item.title}}</view>
                 <view style="display: flex;flex-wrap: wrap;">
                     <view class="article_avatar article_info">
                         <view style="height: 20px;width: 20px;border-radius: 25px;">
-                            <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="../../static/img/1.jpg" mode='aspectFill'></image>
+                            <image style="width: 20px; height: 20px;border-radius: 50%;overflow:hidden;"src="{{item.avatar}}" mode='aspectFill'></image>
                         </view>
                     </view>
-                    <view class="article_name article_info">乐山大佛</view>
-                    <view class="article_time article_info">2022-09-28</view>
+                    <view class="article_name article_info">{{item.title}}</view>
+                    <view class="article_time article_info">{{item.create_time}}</view>
                 </view>
             </view>
             <!-- 图片 -->
             <view class="article_image">
-                <image style="width: 156px; height: 104px;"src="https://inews.gtimg.com/newsapp_bt/0/15287210490/1000" mode='aspectFill'></image>
+                <image style="width: 156px; height: 104px;"src="{{item.main_image}}" mode='aspectFill'></image>
             </view>
         </view>
+
     </view> 
 </view>

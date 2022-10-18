@@ -10,8 +10,10 @@ App({
   },
 
   async register(){
+    let that = this;
     let code = await getCode();
-    let res = await postRequest('wechat\\Login\\Register' , { 'code' :code });
+    console.log(code);
+    let res = await postRequest('wechat\\Login\\Register' ,{'xx-token': wx.getStorageSync('token')}, { 'code' :code });
     if(res.code !=1){
         res.constructor == Object ? success(res.msg,'none') : success('请求超时','');
     }{

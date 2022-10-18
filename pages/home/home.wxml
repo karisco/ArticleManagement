@@ -1,2 +1,17 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<view class="container">
+  <view class="userinfo">
+    <block wx:if='{{userInfo.stage == 2}}'>
+      <image src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <block wx:if='{{userInfo.phone == null}}'>
+        <button open-type="getPhoneNumber" type="primary" bindgetphonenumber="getPhoneNumber" class="hqhm">获取手机号</button>
+      </block>
+      <block wx:else>
+        <text class="userinfo-nickname">{{userInfo.phone}}</text>
+      </block>
+    </block>
+    <block wx:else>
+      <button bindtap="login" type="primary">登录</button>
+    </block>
+  </view>
+</view>
